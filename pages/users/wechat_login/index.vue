@@ -164,12 +164,14 @@
 			getUserPhoneNumberCode(phoneCode, iv, code) {
 				// AuthApi.weixinMiniAppLogin(phoneCode, loginCode).then(res => {
 				AuthApi.weixinMiniAppLogin(phoneCode, code).then(res => {
-					debugger
 					const data = res.data;
 					// TODO 芋艿：refreshToken 机制
 					this.$store.commit("LOGIN", {
 						'token': data.accessToken
 					});
+					if(data.openid){
+						this.$Cache.set('openid', data.openid);
+					}
 					this.getUserInfo(data);
 					this.bindBrokerUser();
 				}).catch(e => {
@@ -278,7 +280,6 @@
 			// #ifdef H5
 			// 公众号登录
 			wechatLogin() {
-        debugger
 				if (!this.code && this.options.scope !== 'snsapi_base') {
 					this.$wechat.oAuth('snsapi_userinfo', '/pages/users/wechat_login/index');
 				} else {
@@ -287,7 +288,6 @@
 			},
 			// 输入手机号后的回调
 			wechatPhone() {
-        debugger
 				this.$Cache.clear('snsapiKey');
 				if (this.options.back_url) {
 					let url = uni.getStorageSync('snRouter');

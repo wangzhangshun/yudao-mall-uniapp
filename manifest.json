@@ -1,6 +1,6 @@
 {
     "name" : "yudao",
-    "appid" : "__UNI__E2B3EDC",
+    "appid" : "__UNI__39B8A35",
     "description" : "芋道商城",
     "versionName" : "1.0.0",
     "versionCode" : 1001,
@@ -59,7 +59,7 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wx63c280fe3248a3e7",
+        "appid" : "wx2e24b5fb5aa9276c",
         "setting" : {
             "urlCheck" : true,
             "minified" : true,
@@ -110,7 +110,7 @@
         "async" : {
             "timeout" : 200000
         },
-        "title" : "芋道商城"
+        "title" : "深圳市源码通微商城"
     },
     "plus" : {
         "statusbar" : {

@@ -1,6 +1,7 @@
 
-let domain = 'http://apif.java.crmeb.net'
-// let domain = 'http://127.0.0.1:48080'
+// let domain = 'http://apif.java.crmeb.net'
+//  let domain = 'http://127.0.0.1:48080'
+ let domain = 'https://stdj.ymtwlkj.com'
 
 module.exports = {
 	// 请求域名 格式： https://您的域名

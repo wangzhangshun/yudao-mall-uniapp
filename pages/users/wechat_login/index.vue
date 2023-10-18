@@ -21,7 +21,9 @@
 				<button hover-class="none" @click="wechatLogin" class="bg-green btn1">微信登录</button>
 				<!-- #endif -->
 				<!-- #ifdef MP -->
-				<button hover-class="none" @tap="getUserProfile" class="bg-green btn1">微信登录</button>
+<!--				<button class="sub_btn" open-type="getPhoneNumber" @getphonenumber="getphonenumber">获取微信手机号</button>-->
+				<button hover-class="none" open-type="getPhoneNumber" @getphonenumber="getphonenumber" class="bg-green btn1">授权手机号登录</button>
+<!--				<button hover-class="none" @tap="getUserProfile" class="bg-green btn1">微信登录MP</button>-->
 				<!-- #endif -->
 				<!-- <button hover-class="none" @click="isUp = true" class="btn2">手机号登录</button> -->
 			</view>
@@ -42,6 +44,7 @@
   import * as UserApi from "@/api/member/user";
   import mobileLogin from '@/components/login_mobile/index.vue'
 	import routinePhone from '@/components/login_mobile/routine_phone.vue'
+	import * as AuthApi from "@/api/member/auth";
 	import {
 		getLogo,
 		getUserPhone
@@ -150,12 +153,30 @@
 				});
 				Routine.getCode()
 					.then(code => {
-						this.getUserPhoneNumber(e.detail.encryptedData, e.detail.iv, code);
+						// this.getUserPhoneNumber(e.detail.encryptedData, e.detail.iv, code);
+						this.getUserPhoneNumberCode(e.detail.code, e.detail.iv, code);
 					})
 					.catch(error => {
 						uni.$emit('closePage', false)
 						uni.hideLoading();
 					});
+			},
+			getUserPhoneNumberCode(phoneCode, iv, code) {
+				// AuthApi.weixinMiniAppLogin(phoneCode, loginCode).then(res => {
+				AuthApi.weixinMiniAppLogin(phoneCode, code).then(res => {
+					debugger
+					const data = res.data;
+					// TODO 芋艿：refreshToken 机制
+					this.$store.commit("LOGIN", {
+						'token': data.accessToken
+					});
+					this.getUserInfo(data);
+					this.bindBrokerUser();
+				}).catch(e => {
+					this.$util.Tips({
+						title: e
+					});
+				});
 			},
 			// 小程序获取手机号码回调
 			getUserPhoneNumber(encryptedData, iv, code) {

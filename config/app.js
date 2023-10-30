@@ -1,5 +1,6 @@
 
-let domain = 'http://apif.java.crmeb.net'
+// let domain = 'http://apif.java.crmeb.net'
+let domain = 'https://stdj.ymtwlkj.com'
 // let domain = 'http://127.0.0.1:48080'
 
 module.exports = {

@@ -444,7 +444,7 @@ export default {
 				uni.showLoading({
 					title: '图片上传中',
 				});
-				const urlPath = HTTP_REQUEST_URL + '/app-api/infra/file/upload'
+				const urlPath = HTTP_REQUEST_URL + '/prod-api/app-api/infra/file/upload'
 				let localPath = res.tempFilePaths[0];
 				uni.uploadFile({
 					url: urlPath,

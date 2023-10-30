@@ -219,7 +219,8 @@
           // 设置营销活动
           const spuIds = good_list.map(item => item.id);
           if (spuIds.length > 0) {
-            PromotionActivityApi.getActivityListBySpuIds(spuIds).then(res => {
+            const spuIdsa = spuIds.join(",");
+            PromotionActivityApi.getActivityListBySpuIds(spuIdsa).then(res => {
               ProductUtil.setActivityList(good_list, res.data);
               const productList = this.$util.SplitArray(good_list, this.productList)
               this.$set(this, 'productList', productList); // 放在此处，避免 Vue 监控不到数组里的元素变化
